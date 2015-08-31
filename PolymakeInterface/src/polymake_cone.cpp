@@ -333,10 +333,11 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
       denom_array[ j ] = denominator( matr(i,j) );
     }
     
-    lcm(1);
+    lcm = 1;
+    
     for( int j = 0; j < matr_cols_signed; j++ ){
       pm::lcm( lcm, denom_array[ j ] );
-      cerr << denom_array[ j ] << ", " << lcm << std::endl;
+      cerr << denom_array[ j ] << ", " << lcm << ", " << pm::lcm( lcm, denom_array[ j ] ) << std::endl;
     }
     
     for( int j = 0; j < matr_cols_signed; j++ ){
