@@ -334,11 +334,14 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
     }
     
     lcm = 1;
-    for( int j = 0; j < matr_cols_signed; j++ )
+    for( int j = 0; j < matr_cols_signed; j++ ){
       pm::lcm( lcm, denom_array[ j ] );
+      cerr << lcm;
+    }
     
     for( int j = 0; j < matr_cols_signed; j++ ){
       convert_array[ j ]*=lcm;
+      cerr << convert_array;
     }
     
     for(int j = 0;j<matr.cols();j++){
