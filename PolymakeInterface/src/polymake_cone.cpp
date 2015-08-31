@@ -341,7 +341,7 @@ Obj REAL_GENERATING_RAYS_OF_CONE( Polymake_Data* data, Obj cone){
     }
     
     for( int j = 0; j < matr_cols_signed; j++ ){
-      convert_array[ j ]*=lcm;
+      convert_array[ j ] = convert_array[ j ] * lcm;
       cerr << "Eintrag: " << convert_array[ j ] << std::endl;
     }
     
