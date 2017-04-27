@@ -736,7 +736,7 @@ InstallGlobalFunction( InstallMethodWithCache,
         
         if TOOLS_FOR_HOMALG_SAVED_CACHES_FROM_INSTALL_METHOD_WITH_CACHE.STORE_CACHES = true then
             
-            cache_string := NameFunction( arg[ 1 ] );
+            cache_string := ShallowCopy( NameFunction( arg[ 1 ] ) );
             
             if IsString( arg[ 2 ] ) then
                 
