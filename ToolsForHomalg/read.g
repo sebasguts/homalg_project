@@ -32,6 +32,8 @@ ReadPackage( "ToolsForHomalg", "gap/GenericView.gi" );
 
 ReadPackage( "ToolsForHomalg", "gap/InstallViews.gi" );
 
+ReadPackage( "ToolsForHomalg", "gap/DeprecatedSynonym.gi" );
+
 if IsBound( MakeThreadLocal ) then
     Perform(
             [
