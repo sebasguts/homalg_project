@@ -508,6 +508,31 @@ Obj FuncPOLYMAKE_PROPERTIES( Obj self, Obj cone ){
   
 }
 
+Obj FuncPOLYMAKE_ISOMORPHIC_POLYTOPES(Obj self, Obj cone1, Obj cone2 ){
+  polymake_start( &akt_data );
+  return REAL_ISOMORPHIC_POLYTOPES(&akt_data,cone1,cone2);
+}
+
+Obj FuncPOLYMAKE_PRINT_CONSTRAINTS(Obj self, Obj polytope){
+  polymake_start( &akt_data );
+  return REAL_PRINT_CONSTRAINTS( &akt_data, polytope );
+}
+
+Obj FuncPOLYMAKE_F2_VECTOR_OF_POLYTOPE(Obj self, Obj polytope){
+  polymake_start( &akt_data );
+  return REAL_F2_VECTOR_OF_POLYTOPE( &akt_data, polytope );
+}
+
+Obj FuncPOLYMAKE_F_VECTOR_OF_POLYTOPE(Obj self, Obj polytope){
+  polymake_start( &akt_data );
+  return REAL_F_VECTOR_OF_POLYTOPE( &akt_data, polytope );
+}
+
+Obj FuncPOLYMAKE_N_VERTICES_OF_POLYTOPE(Obj self, Obj polytope){
+  polymake_start( &akt_data );
+  return REAL_N_VERTICES_OF_POLYTOPE( &akt_data, polytope );
+}
+
 /******************************************************************************
 *V  GVarFuncs . . . . . . . . . . . . . . . . . . list of functions to export
 */
@@ -780,7 +805,27 @@ static StructGVarFunc GVarFuncs [] = {
     { "POLYMAKE_CREATE_MATROID_ABSTRACT", 2, "size,basis",
     (Obj(*)())FuncPOLYMAKE_CREATE_MATROID_ABSTRACT,
     "polymake_main.cpp:POLYMAKE_CREATE_MATROID_ABSTRACT" },
+
+    { "POLYMAKE_ISOMORPHIC_POLYTOPES", 2, "polytope1,polytope2",
+    (Obj(*)())FuncPOLYMAKE_ISOMORPHIC_POLYTOPES,
+    "polymake_main.cpp:POLYMAKE_ISOMORPHIC_POLYTOPES" },
     
+    { "POLYMAKE_PRINT_CONSTRAINTS", 1, "polytope",
+    (Obj(*)())FuncPOLYMAKE_PRINT_CONSTRAINTS,
+    "polymake_main.cpp:POLYMAKE_PRINT_CONSTRAINTS" },
+
+    { "POLYMAKE_F2_VECTOR_OF_POLYTOPE", 1, "polytope",
+    (Obj(*)())FuncPOLYMAKE_F2_VECTOR_OF_POLYTOPE,
+    "polymake_main.cpp:POLYMAKE_F2_VECTOR_OF_POLYTOPE" },
+
+    { "POLYMAKE_F_VECTOR_OF_POLYTOPE", 1, "polytope",
+    (Obj(*)())FuncPOLYMAKE_F_VECTOR_OF_POLYTOPE,
+    "polymake_main.cpp:POLYMAKE_F_VECTOR_OF_POLYTOPE" },
+
+    { "POLYMAKE_N_VERTICES_OF_POLYTOPE", 1, "polytope",
+    (Obj(*)())FuncPOLYMAKE_N_VERTICES_OF_POLYTOPE,
+    "polymake_main.cpp:POLYMAKE_N_VERTICES_OF_POLYTOPE" },
+
   { 0 }
 };
 

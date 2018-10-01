@@ -60,3 +60,18 @@ Obj REAL_LATTICE_POINTS_GENERATORS( Polymake_Data*, Obj );
 
 
 Obj REAL_INTERSECTION_OF_POLYTOPES( Polymake_Data*, Obj, Obj);
+
+
+Obj REAL_ISOMORPHIC_POLYTOPES(Polymake_Data*, Obj, Obj);
+
+
+Obj REAL_PRINT_CONSTRAINTS(Polymake_Data*, Obj);
+
+
+Obj REAL_F2_VECTOR_OF_POLYTOPE(Polymake_Data*, Obj);
+
+
+Obj REAL_F_VECTOR_OF_POLYTOPE(Polymake_Data*, Obj);
+
+
+Obj REAL_N_VERTICES_OF_POLYTOPE(Polymake_Data*, Obj);

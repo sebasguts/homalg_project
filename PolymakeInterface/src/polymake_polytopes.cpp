@@ -455,3 +455,116 @@ Obj REAL_INTERSECTION_OF_POLYTOPES( Polymake_Data* data, Obj cone1, Obj cone2){
   return elem;
   
 }
+
+Obj REAL_ISOMORPHIC_POLYTOPES(Polymake_Data* data, Obj polytope1, Obj polytope2){
+
+#ifdef MORE_TESTS
+  if(! IS_POLYMAKE_POLYTOPE(polytope1) || ! IS_POLYMAKE_POLYTOPE(polytope2) ){
+    ErrorMayQuit("argument is not a polytope",0,0);
+    return NULL;
+  }
+#endif
+
+  perlobj* coneobj1 = PERLOBJ_POLYMAKEOBJ( polytope1 );
+  perlobj* coneobj2 = PERLOBJ_POLYMAKEOBJ( polytope2 );
+
+  data->main_polymake_session->set_application_of( *coneobj1 );
+  bool are_isomorphic;
+  try{
+    are_isomorphic = polymake::call_function( "isomorphic", *coneobj1, *coneobj2 );
+  }
+  POLYMAKE_GAP_CATCH
+
+  return are_isomorphic ? True : False;
+}
+
+Obj REAL_PRINT_CONSTRAINTS(Polymake_Data* data, Obj polytope){
+
+#ifdef MORE_TESTS
+  if(! IS_POLYMAKE_POLYTOPE(polytope) ){
+    ErrorMayQuit("argument is not a polytope",0,0);
+    return NULL;
+  }
+#endif
+
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( polytope );
+
+  data->main_polymake_session->set_application_of( *coneobj );
+  try{
+      polymake::Matrix<polymake::Rational> matr_temp = coneobj->give("FACETS");
+      polymake::call_function( "print_constraints", matr_temp );
+  }
+  POLYMAKE_GAP_CATCH
+  return NULL;
+}
+
+Obj REAL_F2_VECTOR_OF_POLYTOPE( Polymake_Data* data, Obj polytope){
+
+#ifdef MORE_TESTS
+  if( ( ! IS_POLYMAKE_POLYTOPE(polytope) ) ){
+    ErrorMayQuit("argument is not a polytope",0,0);
+    return NULL;
+  }
+#endif
+  
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( polytope );
+  data->main_polymake_session->set_application_of(*coneobj);
+  polymake::Matrix<polymake::Integer> matr;
+  try{
+      polymake::Matrix<polymake::Integer> matr_temp = coneobj->give("F2_VECTOR");
+      matr=polymake::common::primitive( matr_temp );
+  }
+  POLYMAKE_GAP_CATCH
+  
+  return GAP_MATRIX_POLYMAKE_INTEGER_MATRIX( &matr );
+}
+
+
+Obj REAL_F_VECTOR_OF_POLYTOPE(Polymake_Data* data, Obj polytope){
+#ifdef MORE_TESTS
+  if( ( ! IS_POLYMAKE_POLYTOPE(polytope) ) ){
+    ErrorMayQuit("argument is not a polytope",0,0);
+    return NULL;
+  }
+#endif
+  
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( polytope );
+  data->main_polymake_session->set_application_of(*coneobj);
+  polymake::Vector<polymake::Integer> matr;
+  try{
+      polymake::Vector<polymake::Integer> matr_temp = coneobj->give("F_VECTOR");
+      matr=matr_temp;
+  }
+  POLYMAKE_GAP_CATCH
+
+  int len = matr.size();
+  Obj return_list = NEW_PLIST(T_PLIST,len);
+  SET_LEN_PLIST(return_list,len);
+  for(int i=0;i<len;i++){
+    SET_ELM_PLIST(return_list,i+1,INTOBJ_INT(static_cast<long>(matr[i])));
+  }
+  
+  return return_list;
+}
+
+
+Obj REAL_N_VERTICES_OF_POLYTOPE(Polymake_Data* data, Obj polytope){
+#ifdef MORE_TESTS
+  if( ( ! IS_POLYMAKE_POLYTOPE(polytope) ) ){
+    ErrorMayQuit("argument is not a polytope",0,0);
+    return NULL;
+  }
+#endif
+  
+  perlobj* coneobj = PERLOBJ_POLYMAKEOBJ( polytope );
+  data->main_polymake_session->set_application_of(*coneobj);
+  int64_t matr;
+  try{
+      matr = coneobj->give("N_VERTICES");
+  }
+  POLYMAKE_GAP_CATCH
+  
+  return INTOBJ_INT(matr);
+}
+
+
